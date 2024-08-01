@@ -1,20 +1,12 @@
-int majorityElement(vector<int>& nums) {
-    int hash[3] = 0,n= nums.size();
-    for(int i = 0;i<n;i++){
-        hash[nums[i]]++;
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        //摩尔投票，众数记1，非众数记0
+        int x = 0, votes = 0;
+        for (int num : nums){
+            if (votes == 0) x = num;
+            votes += num == x ? 1 : -1;
+        }
+        return x;
     }
-    for(int i = 0;i<n;i++){
-        if(hash[0]>0){
-            nums[i]=0;
-            hash[0]--;
-        }
-        else if(hash[1]>0){
-            nums[i]=1;
-            hash[1]--;
-        }
-        else {
-            nums[i]=2;
-        }
-    }
-    return nums;
-}
+};
